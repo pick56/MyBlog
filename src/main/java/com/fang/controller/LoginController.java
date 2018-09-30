@@ -1,9 +1,12 @@
 package com.fang.controller;
 
+import com.fang.service.ManagerService;
 import com.fang.utils.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fang.model.User;
 import com.fang.service.UserService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/login")
@@ -50,5 +54,22 @@ public class LoginController {
             }
         }
         return "redirect:/templates/manager/login.html";
+    }
+
+    @Resource
+    private ManagerService managerService ;
+
+    @RequestMapping("/show")
+    public String showAllUser(HttpServletRequest request,String username,String password){
+        System.out.println("username2="+username);
+        System.out.println("password2="+password);
+        String x = request.getParameter("username") ;
+        System.out.println(x);
+        ArrayList<User> userlist = managerService.getAllUser() ;
+//        JSONObject ret = new JSONObject() ;
+
+        JSONArray retlist = JSONArray.fromObject(userlist) ;
+        System.out.println(retlist);
+        return retlist.toString();
     }
 }

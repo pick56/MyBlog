@@ -9,11 +9,11 @@ public class MainInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        int status = response.getStatus();
-        if (status == 404) {
-            System.out.println("404拦截器拦截了一个请求");
-            response.sendRedirect("/templates/homepage/404.html");
-        }
+//        int status = response.getStatus();
+//        if (status == 404) {
+//            System.out.println("404拦截器拦截了一个请求");
+//            response.sendRedirect("/templates/homepage/404.html");
+//        }
         return true ;
     }
 

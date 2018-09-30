@@ -25,7 +25,7 @@
 
   <select id="getAllUser" resultType="com.fang.model.User" >
     select
-    count(*)
+    *
     from user
   </select>
 

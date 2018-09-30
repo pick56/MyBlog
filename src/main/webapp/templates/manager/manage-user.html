@@ -113,7 +113,7 @@
                 <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="alluser">
               <tr>
                 <td>1</td>
                 <td>edit</td>
@@ -121,6 +121,14 @@
                 <td>4</td>
                 <td>2015-12-03 15:14:27</td>
                 <td><a rel="1" name="see">修改</a> <a rel="1" name="delete">删除</a> <a href="/User/checked/id/1/action/n">禁用</a></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>test</td>
+                <td>测试</td>
+                <td>3</td>
+                <td>2015-12-03 15:14:27</td>
+                <td><a rel="2" name="see">修改</a> <a rel="2" name="delete">删除</a> <a href="/User/checked/id/2/action/y">启用</a></td>
               </tr>
               <tr>
                 <td>2</td>
@@ -385,20 +393,30 @@ $(function () {
     //向后台请求用户数据
     function getuserlist()
     {
-        alert("Hello World!");
+        //alert("Hello World!");
         $.ajax({
             type: "POST",
-            url: "/login/loginUser",
+            url: "/mgr/show",
             data: {username:"fanglingfei",password:"fanglingfei"},
             cache: false, //不缓存此页面
             success: function (data) {
-                alert("getdata!!") ;
+                //alert("getdata!!") ;
                 var data = JSON.parse(data);
-                $('#truename').val(data.truename);
-                $('#username').val(data.username);
-                $('#usertel').val(data.usertel);
-                $('#userid').val(data.userid);
-                $('#seeUser').modal('show');
+
+                var alluserstr = "" ;
+                $.each(data,function (n,value) {
+                    //alert(n+" "+value);
+                    alluserstr+="<tr>\n" +
+                        "  <td>"+value.id+"</td>\n" +
+                        "  <td>"+value.username+"</td>\n" +
+                        "  <td>系统用户</td>\n" +
+                        "  <td>3</td>\n" +
+                        "  <td>2018-09-13 15:14:27</td>\n" +
+                        "  <td><a rel='2' name='see'>修改</a> <a rel='2' name='delete'>删除</a> <a href='/User/checked/id/2/action/y\'>启用</a></td>\n" +
+                        "</tr>";
+
+                })
+                $('#alluser').html(alluserstr);
             }
         });
     }

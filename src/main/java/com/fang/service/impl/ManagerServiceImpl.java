@@ -15,7 +15,6 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ArrayList<User> getAllUser() {
         ArrayList<User> userlist = userDao.getAllUser() ;
-        System.out.println(userlist);
         return userlist ;
     }
 }
