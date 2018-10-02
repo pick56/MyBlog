@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fang.dao.GoodDao" >
+  <resultMap id="BaseResultMap" type="Good" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="chiContent" property="chicontent" jdbcType="VARCHAR" />
+    <result column="engContent" property="engcontent" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, chiContent, engContent, date, author
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from good
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from good
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fang.model.Good" >
+    insert into good (id, chiContent, engContent, 
+      date, author)
+    values (#{id,jdbcType=INTEGER}, #{chicontent,jdbcType=VARCHAR}, #{engcontent,jdbcType=VARCHAR}, 
+      #{date,jdbcType=DATE}, #{author,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fang.model.Good" >
+    insert into good
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="chicontent != null" >
+        chiContent,
+      </if>
+      <if test="engcontent != null" >
+        engContent,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="chicontent != null" >
+        #{chicontent,jdbcType=VARCHAR},
+      </if>
+      <if test="engcontent != null" >
+        #{engcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fang.model.Good" >
+    update good
+    <set >
+      <if test="chicontent != null" >
+        chiContent = #{chicontent,jdbcType=VARCHAR},
+      </if>
+      <if test="engcontent != null" >
+        engContent = #{engcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fang.model.Good" >
+    update good
+    set chiContent = #{chicontent,jdbcType=VARCHAR},
+      engContent = #{engcontent,jdbcType=VARCHAR},
+      date = #{date,jdbcType=DATE},
+      author = #{author,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

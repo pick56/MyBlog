@@ -389,14 +389,11 @@
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/admin-scripts.js"></script> 
 <script>
-$(function () {
-    //向后台请求用户数据
-    function getuserlist()
-    {
+    function getuserlist(){
         //alert("Hello World!");
         $.ajax({
             type: "POST",
-            url: "/mgr/show",
+            url: "/mgr/showalluser",
             data: {username:"fanglingfei",password:"fanglingfei"},
             cache: false, //不缓存此页面
             success: function (data) {
@@ -420,6 +417,9 @@ $(function () {
             }
         });
     }
+$(function () {
+    //向后台请求用户数据
+
     getuserlist();
     $("#main table tbody tr td a").click(function () {
             var name = $(this);

@@ -21,7 +21,7 @@ public class Article {
 
     private String top;
 
-    private String key;
+    private String keyname;
 
     private String keyvalue;
 
@@ -98,11 +98,11 @@ public class Article {
     }
 
     public String getKey() {
-        return key;
+        return keyname;
     }
 
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setKeyname(String keyname) {
+        this.keyname = keyname == null ? null : keyname.trim();
     }
 
     public String getKeyvalue() {

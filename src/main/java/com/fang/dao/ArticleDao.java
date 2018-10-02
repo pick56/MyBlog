@@ -1,7 +1,8 @@
 package com.fang.dao;
 
 import com.fang.model.Article;
-import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 public interface ArticleDao {
     int deleteByPrimaryKey(Integer id);
@@ -15,4 +16,6 @@ public interface ArticleDao {
     int updateByPrimaryKeySelective(Article record);
 
     int updateByPrimaryKey(Article record);
+
+    ArrayList<Article> getAllArticle();
 }

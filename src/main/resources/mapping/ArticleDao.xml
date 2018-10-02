@@ -11,18 +11,23 @@
     <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
     <result column="createDate" property="createdate" jdbcType="DATE" />
     <result column="top" property="top" jdbcType="VARCHAR" />
-    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="keyname" property="keyname" jdbcType="VARCHAR" />
     <result column="keyValue" property="keyvalue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, contentId, title, abstr, categoryId, categoryValue, imgurl, createDate, top, 
-    key, keyValue
+    keyname, keyValue
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from article
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getAllArticle" resultType="com.fang.model.Article" >
+    select
+    *
+    from article
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from article
@@ -32,11 +37,11 @@
     insert into article (id, contentId, title, 
       abstr, categoryId, categoryValue, 
       imgurl, createDate, top, 
-      key, keyValue)
+      keyname, keyValue)
     values (#{id,jdbcType=INTEGER}, #{contentid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
       #{abstr,jdbcType=VARCHAR}, #{categoryid,jdbcType=VARCHAR}, #{categoryvalue,jdbcType=VARCHAR}, 
       #{imgurl,jdbcType=VARCHAR}, #{createdate,jdbcType=DATE}, #{top,jdbcType=VARCHAR}, 
-      #{key,jdbcType=VARCHAR}, #{keyvalue,jdbcType=VARCHAR})
+      #{keyname,jdbcType=VARCHAR}, #{keyvalue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="Article" >
     insert into article
@@ -68,8 +73,8 @@
       <if test="top != null" >
         top,
       </if>
-      <if test="key != null" >
-        key,
+      <if test="keyname != null" >
+        keyname,
       </if>
       <if test="keyvalue != null" >
         keyValue,
@@ -103,8 +108,8 @@
       <if test="top != null" >
         #{top,jdbcType=VARCHAR},
       </if>
-      <if test="key != null" >
-        #{key,jdbcType=VARCHAR},
+      <if test="keyname != null" >
+        #{keyname,jdbcType=VARCHAR},
       </if>
       <if test="keyvalue != null" >
         #{keyvalue,jdbcType=VARCHAR},
@@ -138,8 +143,8 @@
       <if test="top != null" >
         top = #{top,jdbcType=VARCHAR},
       </if>
-      <if test="key != null" >
-        key = #{key,jdbcType=VARCHAR},
+      <if test="keyname != null" >
+        keyname = #{keyname,jdbcType=VARCHAR},
       </if>
       <if test="keyvalue != null" >
         keyValue = #{keyvalue,jdbcType=VARCHAR},
@@ -157,7 +162,7 @@
       imgurl = #{imgurl,jdbcType=VARCHAR},
       createDate = #{createdate,jdbcType=DATE},
       top = #{top,jdbcType=VARCHAR},
-      key = #{key,jdbcType=VARCHAR},
+      keyname = #{keyname,jdbcType=VARCHAR},
       keyValue = #{keyvalue,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
